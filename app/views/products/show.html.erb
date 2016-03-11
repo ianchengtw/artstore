@@ -14,7 +14,11 @@
     <div>Quatity: <%= @product.quantity %></div>
     <div class="product-price">Price: $ <%= @product.price %></div>
     <div class="pull-right">
-      <%= link_to("Add to Cart", '#', class: 'btn btn-danger btn-lg') %>
+      <% if @product.quantity > 0 %>
+        <%= link_to("Add to Cart", add_to_cart_product_path(@product), method: :post, class: 'btn btn-danger btn-lg') %>
+      <% else %>
+        Sell Out
+      <% end %>
     </div>
   </div>
 </div>

@@ -1,0 +1,58 @@
+<div class="col-md-12">
+  <%= link_to("Empty Cart", empty_carts_path, method: :delete,
+              class: 'pull-right', style: "text-decoration: underline;",
+              data: { confirm: 'Are you sure to empty whole cart?' }) %>
+
+  <h2>Shopping Cart</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th colspan="2">Product Info</th>
+        <th>Price</th>
+        <th>Qty</th>
+        <th>Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% current_cart.items.each do |item| %>
+        <tr>
+          <td>
+            <% if item.photo.present? %>
+              <%= image_tag(item.photo.image.thumb.url, class: 'thumbnail') %>
+            <% else %>
+              <%= image_tag('http://placehold.it/200x200&text=No Pic', class: 'thumbnail') %>
+            <% end %>
+          </td>
+          <td><%= link_to(item.title, product_path(item)) %></td>
+          <td><%= item.price %></td>
+          <td>
+            <% item = current_cart.find_cart_item(item) %>
+
+            <%= form_for item, url: item_path(item) do |f| %>
+              <%= f.select :quantity, 1..item.quantity %>
+              <%= f.submit "Update", class: 'btn btn-xs btn-default', data: { disable_with: 'Submitting...' } %>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to item_path(item), method: :delete do %>
+              <i class="fa fa-trash fa-2x"></i>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="total clearfix">
+    <span class="pull-right">
+      Total: <%= render_cart_total_price(current_cart) %> NTD
+    </span>
+  </div>
+
+  <hr>
+
+  <div class="checkout clearfix">
+    <%= link_to("Checkout", checkout_carts_path, method: :post, class: 'btn btn-lg btn-danger pull-right') %>
+  </div>
+</div>

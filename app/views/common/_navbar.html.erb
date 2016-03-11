@@ -15,8 +15,8 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <%= link_to '#' do %>
-            Cart <i class="fa fa-shopping-cart"></i> (0)
+          <%= link_to carts_path do %>
+            Cart <i class="fa fa-shopping-cart"></i> ( <%= render_cart_items_count(current_cart) %> )
           <% end %>
         </li>
 
@@ -33,6 +33,7 @@
               <% if current_user.admin? %>
                 <li><%= link_to("Admin Menu", admin_products_path) %></li>
               <% end %>
+              <li><%= link_to("My Orders", account_orders_path) %></li>
               <li><%= link_to("Sign out", destroy_user_session_path, method: :delete) %></li>
             </ul>
           </li>
