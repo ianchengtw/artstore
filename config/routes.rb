@@ -34,7 +34,7 @@ Rails.application.routes.draw do
       post :pay_with_credit_card
       post :pay2go_cc_notify
       post :pay_with_atm
-      post :pay2go_atm_complete
+      get :pay2go_atm_complete
     end
   end
   resources :items, controller: 'cart_items'
