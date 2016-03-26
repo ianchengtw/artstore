@@ -64,6 +64,15 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { host: 'https://arcane-tor-23111.herokuapp.com' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    port:           587,
+    address:        "smtp.mailgun.org",
+    user_name:      ENV['mailgun_user'],
+    password:       ENV['mailgun_secret'],
+    domain:         "sandbox1134e43fab5d442697ed7afa6b976411.mailgun.org",
+    authentication: :plain,
+  }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
