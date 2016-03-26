@@ -64,11 +64,7 @@ class OrdersController < ApplicationController
       @order.set_payment_with!('atm')
       @order.make_payment!
 
-      if @order.is_paid?
-        redirect_to order_path(@order.token), notice: 'Pay successfully'
-      else
-        render text: 'Pay with ATM failed'
-      end
+      redirect_to order_path(@order.token), notice: 'Pay successfully'
     else
       render text: 'Trade failed'
     end
