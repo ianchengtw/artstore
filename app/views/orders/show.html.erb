@@ -51,7 +51,7 @@
     <p class="text-center">This order has been paid.</p>
   <% else %>
     <div class="pull-right" style="padding: 10px;">
-      <%= link_to("Pay with ATM", pay_with_atm_order_path(@order.token), method: :post, class: 'btn btn-lg btn-danger') %>
+      <%= render 'pay_with_atm', order: @order %>
     </div>
     <div class="pull-right" style="padding: 10px;">
       <%= render 'pay_with_credit_card', order: @order %>
